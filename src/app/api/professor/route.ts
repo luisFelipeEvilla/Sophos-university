@@ -20,7 +20,5 @@ export async function POST(req: Request) {
 
     const professors = await res.json();
 
-    console.log(professors);
-
     return NextResponse.json(professors);
 }

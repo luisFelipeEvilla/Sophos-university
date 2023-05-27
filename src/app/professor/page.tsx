@@ -29,7 +29,7 @@ export default function Profesors() {
             <div className="flex justify-end mt-4 w-3/5">
                 <Link className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2" href={'/professor/add'}>New</Link>
             </div>
-            <DataTable rows={professors} columns={columns} setData={setProfessors} entityName="profesor"></DataTable>
+            <DataTable rows={professors} columns={columns} setData={setProfessors} entityName="professor"></DataTable>
         </main>
     )
 }
