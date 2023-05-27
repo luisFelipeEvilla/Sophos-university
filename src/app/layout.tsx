@@ -11,10 +11,10 @@ export const metadata = {
 }
 
 const links = [
-  { href: '/faculties', label: 'Faculties', icon: <FaBuilding/> },
-  { href: '/courses', label: 'Courses', icon: <FaSchool/> },
-  { href: '/students', label: 'Students', icon: <FaUserGraduate/> },
-  { href: '/teachers', label: 'Teachers',  icon: <FaChalkboardTeacher/> },
+  { href: '/faculty', label: 'Faculties', icon: <FaBuilding/> },
+  { href: '/course', label: 'Courses', icon: <FaSchool/> },
+  { href: '/student', label: 'Students', icon: <FaUserGraduate/> },
+  { href: '/teacher', label: 'Teachers',  icon: <FaChalkboardTeacher/> },
 ]
 
 export default function RootLayout({

@@ -14,8 +14,19 @@ export default function Faculties() {
     }, [])
 
     const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 70 },
-        { field: 'name', headerName: 'Name', width: 250 },
+        { field: 'id', headerName: 'ID', flex: 0.3 },
+        { field: 'name', headerName: 'Name', flex: 1 },
+        { field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
+            <div className="flex justify-around">
+                <Link href={`/faculty/${params.id}`}>
+                    <button className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2">Edit</button>
+                </Link>
+                <Link href={`/faculty/${params.id}/delete`}>
+                    <button className="bg-red-500 hover:bg-red-600 rounded-md text-white font-bold px-6 py-2">Delete</button>
+                </Link>
+            </div>
+        )}
+
     ] 
 
     return (
