@@ -7,3 +7,20 @@ export async function GET(req: Request) {
 
     return NextResponse.json(professors);
 };
+
+export async function POST(req: Request) {
+    const data = await req.json();
+    const res = await fetch(`http://127.0.0.1:3000/teacher`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    const professors = await res.json();
+
+    console.log(professors);
+
+    return NextResponse.json(professors);
+}
