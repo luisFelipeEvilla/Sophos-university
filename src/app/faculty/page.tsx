@@ -10,24 +10,42 @@ export default function Faculties() {
     useEffect(() => {
         fetch('/api/faculty')
             .then(response => response.json())
-            .then(data => {setFaculties(data)})
+            .then(data => { setFaculties(data) })
     }, [])
+
+    const handleDelete = (id: number) => {
+        fetch(`/api/faculty/${id}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    setFaculties(faculties.filter(faculty => faculty.id !== id))
+                    alert('Faculty deleted successfully')
+                } else {
+                    console.log(data)
+                    alert('Error deleting faculty')
+                }
+            })
+    }
 
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', flex: 0.3 },
         { field: 'name', headerName: 'Name', flex: 1 },
-        { field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
-            <div className="flex justify-around">
-                <Link href={`/faculty/${params.id}`}>
-                    <button className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2">Edit</button>
-                </Link>
-                <Link href={`/faculty/${params.id}/delete`}>
-                    <button className="bg-red-500 hover:bg-red-600 rounded-md text-white font-bold px-6 py-2">Delete</button>
-                </Link>
-            </div>
-        )}
+        {
+            field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
+                <div className="flex justify-around gap-2">
+                    <Link href={`/faculty/${params.id}`}>
+                        <button className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2">Edit</button>
+                    </Link>
 
-    ] 
+                    <button onClick={() => handleDelete(params.id as number)} className="bg-red-500 hover:bg-red-600 rounded-md text-white font-bold px-6 py-2">Delete</button>
+
+                </div>
+            )
+        }
+
+    ]
 
     return (
         <main className="flex flex-col items-center w-full py-20">
@@ -39,7 +57,7 @@ export default function Faculties() {
                 <DataGrid
                     rows={faculties}
                     columns={columns}
-                ></DataGrid>    
+                ></DataGrid>
             </div>
         </main>
     )
