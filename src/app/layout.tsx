@@ -2,7 +2,7 @@ import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { FaSchool, FaUserGraduate, FaBuilding, FaChalkboardTeacher } from 'react-icons/fa';
-import { Navigation } from '@/components/navigation';
+import { Navigation } from  '../components/navigation';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
