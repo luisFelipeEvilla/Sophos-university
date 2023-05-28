@@ -31,10 +31,28 @@ export default function addstudent({ params }: any) {
         });
 
         if (res.status === 200) {
-           toast('Student updated Successfully', { icon: '👏'})
+            toast('Student updated Successfully', { icon: '👏' })
         } else {
             console.log(res);
-            toast('Error updating student', { icon: '❌'})
+            toast('Error updating student', { icon: '❌' })
+        }
+    }
+
+    const handleEnroll = async () => {
+        const res = await fetch(`/api/student/${params.id}/semester`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ credits: 17})
+        });
+
+        const result = await res.json();
+        if (result.success === true) {
+            toast('Student enrolled Successfully', { icon: '👏' })
+        } else {
+            console.log(res);
+            toast('Error enrolling student', { icon: '❌' })
         }
     }
 
@@ -69,7 +87,7 @@ export default function addstudent({ params }: any) {
             <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
                     <div className="flex flex-col items-center w-3/5 ">
-                        <CreateBanner title="Add New Profesor" imgPath={"/images/create-faculty-banner"} />
+                        <CreateBanner title="Add New Profesor" imgPath={"/images/student-banner.jpg"} />
 
                         <div className="flex flex-col mt-4">
                             <TextInput label="First Name" placeholder="John" register={register} fieldName="first_name" options={{}} errors={errors} />
@@ -78,11 +96,10 @@ export default function addstudent({ params }: any) {
                             <SelectInput rows={faculties} rowsLabel="name" rowsValue="id" label="Faculty" placeholder="faculty" register={register} fieldName="facultyId" options={{}} errors={errors} />
                         </div>
 
-                        <div className="flex justify-center mt-6">
+                        <div className="flex items-center gap-2 justify-center mt-6">
+                            <button type="button" onClick={ handleEnroll} className="rounded-md bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-1 w-fit cursor-pointer">Enroll To Semester</button>
                             <input className="rounded-md bg-green-500 hover:bg-green-600 text-white font-bold py-1 w-24 cursor-pointer " type='submit' value={'Save'} />
                         </div>
-
-
                     </div>
                 </form>
 
