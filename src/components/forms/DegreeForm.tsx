@@ -35,7 +35,7 @@ export default function DegreeForm(props: propsType) {
 
 
     return (
-        <form key={2} onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-full">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-full">
             <TextInput label="Degree Name" placeholder="Degree Name" register={register} fieldName="name" options={{}} errors={errors} />
             <DateInput label="Earned At" placeholder="Earned At" register={register} fieldName="earned_at" options={{}} errors={errors} />
 

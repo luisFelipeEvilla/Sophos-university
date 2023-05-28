@@ -3,10 +3,10 @@ import ProfessorCard from "@/components/cards/professor-card";
 import NumericInput from "@/components/inputs/NumericInput";
 import TextInput from "@/components/inputs/TextInput";
 import { Course } from "@/types/Course";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
+import AddProfessorForm from "../../../components/forms/addProfessorForm";
 
 type Inputs = {
     name: number,
@@ -15,7 +15,7 @@ type Inputs = {
     credits: number,
 }
 
-export default function EditFaculty({params}: any) {
+export default function EditFaculty({ params }: any) {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
     const [course, setCourse] = useState<Course>();
 
@@ -33,7 +33,7 @@ export default function EditFaculty({params}: any) {
 
         fetCourse();
     }, [params])
-    
+
     const onSubmit: SubmitHandler<Inputs> = async data => {
         const res = await fetch(`/api/course/${params.id}`, {
             method: 'PATCH',
@@ -44,7 +44,7 @@ export default function EditFaculty({params}: any) {
         });
 
         if (res.status === 200) {
-            toast('Course updated Successfully', { icon: '👏'});
+            toast('Course updated Successfully', { icon: '👏' });
         }
     }
     return (
@@ -52,7 +52,7 @@ export default function EditFaculty({params}: any) {
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-3/5 my-10">
                 <div className="flex flex-col items-center justify-center ">
                     <div className="w-[160px] h-[160px] rounded-full bg-gray-500"></div>
-                    <h1 className="text-4xl font-bold mt-6">Add Faculty</h1>
+                    <h1 className="text-4xl font-bold mt-6">Add a new Course</h1>
                 </div>
 
                 <div className="flex flex-col mt-4">
@@ -84,12 +84,18 @@ export default function EditFaculty({params}: any) {
                 </div>
             </form>
 
-            <div className="flex">
-                {
-                    course?.teachers.map((professor) => (
-                        <ProfessorCard index={professor.id} professor={professor} />
-                    ))
-                }
+            <div className="flex justify-center w-3/5 flex-col">
+                <h4 className="text-xl text-center font-semibold">Teachers</h4>
+                
+                < AddProfessorForm id={params.id} />
+                <div className="flex gap-4">
+                    {
+                        course?.teachers.map((professor) => (
+                            <ProfessorCard index={professor.id} professor={professor} />
+                        ))
+                    }
+                </div>
+
             </div>
         </div>
     )
