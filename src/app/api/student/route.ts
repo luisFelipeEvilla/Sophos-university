@@ -14,15 +14,22 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {     
+    const data = await req.json();
+
+    console.log(data);
+    
     const res = await fetch(`${process.env.API_BASE_URL}/student`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(req.body)
+        body: JSON.stringify(data)
     });
 
     const result = await res.json();
+
+    console.log(result);
+    
 
     return NextResponse.json(result, { status: 200 })
 }

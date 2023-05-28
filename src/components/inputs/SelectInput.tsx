@@ -1,7 +1,7 @@
 type propsType = { rows: any[], rowsLabel: string, rowsValue: string, defaultValue?: string,
     label: string, placeholder: string,
     register: any, fieldName: string, options: any, errors: any }
-export default function SelectInput(props: propsType) {
+export default function SelectInput(props: propsType) { 
     return (
         <div className="flex flex-col mt-4">
             <label className="text-lg font-bold">{props.label}</label>
