@@ -1,4 +1,4 @@
-type propsType = { defaultValue?: string,  label: string, placeholder: string, register: any, fieldName: string, options: any, errors: any }
+type propsType = { defaultValue?: number,  label: string, placeholder: string, register: any, fieldName: string, options: any, errors: any }
 const NumericInput = (props: propsType) => {
 
     const options = Object.assign({}, props.options, { valueAsNumber: true })
