@@ -26,6 +26,7 @@ export default function EditFaculty({ params }: any) {
     const columns = [
         { field: 'id', headerName: 'ID', flex: 0.3 },
         { field: 'name', headerName: 'Name', flex: 1, valueGetter: (params: any) => `${params.row.first_name} ${params.row.last_name}` },
+        { field: 'semester', headerName: 'Semester', flex: 1 }
     ]
 
     useEffect(() => {
@@ -39,7 +40,13 @@ export default function EditFaculty({ params }: any) {
             setValue('max_quota', course.max_quota);
             setValue('credits', course.credits);
 
-            const students = course.students?.map((student: any) => student.student)
+            const students = course.students?.map((student: any) => {
+                const semester = student.semester;
+                return {
+                    ...student.student,
+                    semester: `${semester.year}-${semester.period}` 
+                }
+            })
 
             setStudents(students);
         }
