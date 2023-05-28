@@ -1,11 +1,12 @@
 "use client";
+import ProfessorCard from "@/components/cards/professor-card";
 import NumericInput from "@/components/inputs/NumericInput";
 import TextInput from "@/components/inputs/TextInput";
 import { Course } from "@/types/Course";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 type Inputs = {
     name: number,
@@ -47,8 +48,8 @@ export default function EditFaculty({params}: any) {
         }
     }
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex w-full justify-center">
-            <div className="flex flex-col items-center w-3/5 my-10">
+        <div className="flex flex-col w-full items-center">
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-3/5 my-10">
                 <div className="flex flex-col items-center justify-center ">
                     <div className="w-[160px] h-[160px] rounded-full bg-gray-500"></div>
                     <h1 className="text-4xl font-bold mt-6">Add Faculty</h1>
@@ -81,7 +82,15 @@ export default function EditFaculty({params}: any) {
                 <div className="flex justify-center mt-6">
                     <input className="rounded-md bg-green-500 hover:bg-green-600 text-white font-bold py-1 w-24 cursor-pointer " type='submit' value={'Save'} />
                 </div>
+            </form>
+
+            <div className="flex">
+                {
+                    course?.teachers.map((professor) => (
+                        <ProfessorCard index={professor.id} professor={professor} />
+                    ))
+                }
             </div>
-        </form>
+        </div>
     )
 }

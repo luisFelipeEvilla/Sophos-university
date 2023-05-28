@@ -1,4 +1,4 @@
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 type propsType = { teacher: number, degree: Degree, index: number }
 export default function DegreeCard(props: propsType) {

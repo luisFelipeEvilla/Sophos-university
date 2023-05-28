@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 export default function Profesors() {
-    const [ professors, setProfessors ] = useState<Profesor[]>([]);
+    const [ professors, setProfessors ] = useState<Professor[]>([]);
 
     useEffect(() => {
         fetch('/api/professor')

@@ -4,4 +4,5 @@ export type Course = {
     description: string,
     max_quota: number,
     credits: number,
+    teachers: Professor[],
 }

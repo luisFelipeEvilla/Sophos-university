@@ -5,9 +5,8 @@ import SelectInput from "@/components/inputs/SelectInput";
 import TextInput from "@/components/inputs/TextInput";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler, set } from "react-hook-form";
-import { getDate } from "../../utils/getDate";
 import DegreeForm from "@/components/forms/DegreeForm";
-import DegreeCard from "@/components/degree-card";
+import DegreeCard from "../../../components/degree-card";
 import toast, { Toaster } from "react-hot-toast";
 
 type Inputs = {
@@ -20,7 +19,7 @@ type Inputs = {
 export default function addProfessor({ params }: any) {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
     const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm<Inputs>();
-    const [professor, setProfessor] = useState<Profesor>();
+    const [professor, setProfessor] = useState<Professor>();
     const [faculties, setFaculties] = useState([]);
     const [loading, setLoading] = useState(true);
 
