@@ -24,7 +24,7 @@ export default function DataTable(props: propsType) {
         {
             field: 'actions', headerName: 'Actions', flex: 1, renderCell: (params) => (
                 <div className="flex justify-around gap-2">
-                    <Link href={`/faculty/${params.id}`}>
+                    <Link href={`/${props.entityName}/${params.id}`}>
                         <button className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2">Edit</button>
                     </Link>
 
