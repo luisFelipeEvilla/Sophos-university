@@ -26,7 +26,7 @@ export async function PATCH(req: Request, { params}: any) {
 
     const result = await res.json();
 
-    return NextResponse.json(result, { status: 200 })
+    return NextResponse.json({success: true, result })
 }
 
 export async function DELETE(req: Request, { params}: any) {
@@ -39,5 +39,5 @@ export async function DELETE(req: Request, { params}: any) {
 
     const result = await res.json();
 
-    return NextResponse.json(result, { status: 200 })
+    return NextResponse.json({ success: true, result})
 }

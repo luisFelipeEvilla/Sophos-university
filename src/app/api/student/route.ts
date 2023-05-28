@@ -16,8 +16,6 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {     
     const data = await req.json();
 
-    console.log(data);
-    
     const res = await fetch(`${process.env.API_BASE_URL}/student`, {
         method: 'POST',
         headers: {
@@ -27,9 +25,6 @@ export async function POST(req: Request) {
     });
 
     const result = await res.json();
-
-    console.log(result);
-    
 
     return NextResponse.json(result, { status: 200 })
 }
