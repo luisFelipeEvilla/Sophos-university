@@ -68,9 +68,9 @@ export default function addProfessor({ params }: any) {
 
     return (
         loading ? <div>Loading...</div> :
-            <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center">
+            <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
-                    <div className="flex flex-col items-center w-3/5 my-10">
+                    <div className="flex flex-col items-center w-3/5 ">
                         <CreateBanner title="Add New Profesor" imgPath={"/images/create-faculty-banner"} />
 
                         <div className="flex flex-col mt-4">
@@ -93,10 +93,10 @@ export default function addProfessor({ params }: any) {
 
                     <DegreeForm id={params.id} />
 
-                    <div className="flex gap-4 w-full">
+                    <div className="flex justify-center gap-4 w-full">
                         {
                             professor?.degrees.map((degree, index) => (
-                                <DegreeCard key={index} degree={degree} index={0} />
+                                <DegreeCard teacher={params.id} key={index} degree={degree} index={0} />
                             ))
                         }
                     </div>

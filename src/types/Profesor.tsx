@@ -10,4 +10,5 @@ type Degree = {
     id: number,
     name: string,
     earned_at: string,
+    teacherId: number,
 }

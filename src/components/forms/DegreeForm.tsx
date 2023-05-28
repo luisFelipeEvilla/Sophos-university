@@ -25,6 +25,7 @@ export default function DegreeForm(props: propsType) {
 
         if (res.status === 200) {
             alert('Degree added Successfully')
+            window.location.reload();
         } else {
             console.log(res);
             alert('Error adding Degree')
