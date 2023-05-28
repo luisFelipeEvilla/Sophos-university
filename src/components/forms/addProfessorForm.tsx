@@ -54,7 +54,7 @@ export default function AddProfessorForm(props: any) {
             </div>
 
             <div className="flex justify-center mt-6">
-                <input className="rounded-md bg-green-500 hover:bg-green-600 text-white font-bold py-1 w-24 cursor-pointer " type='submit' value={'Save'} />
+                <input className="rounded-md bg-green-500 hover:bg-green-600 text-white font-bold py-1 w-24 cursor-pointer " type='submit' value={'Add'} />
             </div>
         </form>
     )

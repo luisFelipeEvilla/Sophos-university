@@ -30,7 +30,7 @@ export default function RootLayout({
         <div className='flex'>
           <Toaster />
           <Navigation links={links} />
-          <div className='h-screen w-full overflow-y-auto'>
+          <div className='h-screen w-full overflow-y-auto py-8'>
             {children}
           </div>
         </div>

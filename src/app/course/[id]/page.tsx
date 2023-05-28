@@ -7,6 +7,9 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import AddProfessorForm from "../../../components/forms/addProfessorForm";
+import { DataGrid } from "@mui/x-data-grid";
+import { Student } from "@/types/Student";
+import CreateBanner from "@/components/create-banner";
 
 type Inputs = {
     name: number,
@@ -18,17 +21,27 @@ type Inputs = {
 export default function EditFaculty({ params }: any) {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
     const [course, setCourse] = useState<Course>();
+    const [ students , setStudents ] = useState<Student[]>([]);
+
+    const columns = [
+        { field: 'id', headerName: 'ID', flex: 0.3 },
+        { field: 'name', headerName: 'Name', flex: 1, valueGetter: (params: any) => `${params.row.first_name} ${params.row.last_name}` },
+    ]
 
     useEffect(() => {
         const fetCourse = async () => {
             const res = await fetch(`/api/course/${params.id}`);
-            const faculty = await res.json();
-            setCourse(faculty);
+            const course = await res.json();
+            setCourse(course);
 
-            setValue('name', faculty.name);
-            setValue('description', faculty.description);
-            setValue('max_quota', faculty.max_quota);
-            setValue('credits', faculty.credits);
+            setValue('name', course.name);
+            setValue('description', course.description);
+            setValue('max_quota', course.max_quota);
+            setValue('credits', course.credits);
+
+            const students = course.students?.map((student: any) => student.student)
+
+            setStudents(students);
         }
 
         fetCourse();
@@ -50,10 +63,7 @@ export default function EditFaculty({ params }: any) {
     return (
         <div className="flex flex-col w-full items-center">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-3/5 my-10">
-                <div className="flex flex-col items-center justify-center ">
-                    <div className="w-[160px] h-[160px] rounded-full bg-gray-500"></div>
-                    <h1 className="text-4xl font-bold mt-6">Add a new Course</h1>
-                </div>
+                <CreateBanner title="Edit Course" imgPath={"/images/course-banner.jpg"} />
 
                 <div className="flex flex-col mt-4">
                     <TextInput
@@ -88,7 +98,7 @@ export default function EditFaculty({ params }: any) {
                 <h4 className="text-xl text-center font-semibold">Teachers</h4>
                 
                 < AddProfessorForm id={params.id} />
-                <div className="flex gap-4">
+                <div className="flex justify-center gap-4">
                     {
                         course?.teachers.map((professor) => (
                             <ProfessorCard courseId={params.id} index={professor.id} professor={professor} />
@@ -96,6 +106,17 @@ export default function EditFaculty({ params }: any) {
                     }
                 </div>
 
+            </div>
+
+            <div className="flex flex-col gap-4">
+                <h4 className="text-xl text-center font-semibold">Students</h4>
+
+                <div className="flex h-[600px]">
+                    <DataGrid
+                        rows={students || []}
+                        columns={columns}
+                    />
+                </div>
             </div>
         </div>
     )
