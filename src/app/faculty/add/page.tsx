@@ -28,7 +28,7 @@ export default function addFaculty() {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full justify-center">
             <div className="flex flex-col items-center w-3/5 my-10">
-                <CreateBanner title="Add New Faculty"   imgPath={"/images/create-faculty-banner"} />
+                <CreateBanner title="Add New Faculty"   imgPath={"/images/faculty-banner.png"} />
 
                 <div className="flex flex-col mt-4">
                     <TextInput label="Name" placeholder="John Doe Faculty" register={register} fieldName="name" options={{ required: { value: true, message: "Name is required" } }} errors={errors} />

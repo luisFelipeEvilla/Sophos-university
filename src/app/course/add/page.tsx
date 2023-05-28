@@ -35,7 +35,7 @@ export default function AddCourse() {
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full justify-center">
             <Toaster/>
             <div className="flex flex-col items-center w-3/5 my-10">
-                <CreateBanner title="Add New Course"   imgPath={"/images/create-course-banner"} />
+                <CreateBanner title="Add New Course"   imgPath={"/images/course-banner.jpg"} />
 
                 <div className="flex flex-col mt-4">
                     <TextInput label="Name" placeholder="Physics" register={register} fieldName="name" options={{ required: { value: true, message: "Name is required" } }} errors={errors} />
