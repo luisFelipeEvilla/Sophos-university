@@ -16,6 +16,7 @@ const links = [
   { href: '/course', label: 'Courses', icon: <FaSchool/> },
   { href: '/student', label: 'Students', icon: <FaUserGraduate/> },
   { href: '/professor', label: 'Professors',  icon: <FaChalkboardTeacher/> },
+  { href: '/semester', label: 'Semesters',  icon: <FaChalkboardTeacher/> },
 ]
 
 export default function RootLayout({
