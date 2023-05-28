@@ -122,6 +122,7 @@ export default function EditFaculty({ params }: any) {
                     <DataGrid
                         rows={students || []}
                         columns={columns}
+                        sortModel={[{ field: 'semester', sort: 'desc' }]}
                     />
                 </div>
             </div>

@@ -61,7 +61,6 @@ export default function addstudent({ params }: any) {
         if (result.success === true) {
             toast('Student enrolled Successfully', { icon: '👏' })
         } else {
-            console.log(res);
             toast('Error enrolling student', { icon: '❌' })
         }
     }
