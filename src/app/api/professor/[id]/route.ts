@@ -23,7 +23,7 @@ export async function DELETE(req: Request, { params }: any) {
 export async function PATCH(req: Request, { params }: any) {
     const { id } = params;
     const data = await req.json();
-    console.log(data);
+    
     const res = await fetch(`http://127.0.0.1:3000/teacher/${id}`, { 
         method: 'PATCH',
         headers: {
