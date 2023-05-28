@@ -91,7 +91,7 @@ export default function EditFaculty({ params }: any) {
                 <div className="flex gap-4">
                     {
                         course?.teachers.map((professor) => (
-                            <ProfessorCard index={professor.id} professor={professor} />
+                            <ProfessorCard courseId={params.id} index={professor.id} professor={professor} />
                         ))
                     }
                 </div>

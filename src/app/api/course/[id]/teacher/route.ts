@@ -13,3 +13,17 @@ export async function POST(req: Request, { params }: any ) {
 
     return NextResponse.json({ success: true , status: 201})
 }
+
+export async function DELETE(req: Request, { params }: any ) {
+    const { id } = params;
+    const { teacherId } = await req.json();
+    
+    const res = await fetch(`${process.env.API_BASE_URL}/course/${id}/teacher/${teacherId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    return NextResponse.json({ success: true , status: 201})
+}
