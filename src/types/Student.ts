@@ -1,4 +1,5 @@
 import { Course } from "./Course";
+import { EnrollSemester } from "./EnrollSemester";
 
 export type Student = {
     id: number;
@@ -7,4 +8,5 @@ export type Student = {
     birthday: Date;
     faculty: Faculty;
     courses: Course[];
+    semesters?: EnrollSemester[];
 }
