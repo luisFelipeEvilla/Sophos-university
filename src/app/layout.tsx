@@ -2,7 +2,7 @@ import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { FaSchool, FaUserGraduate, FaBuilding, FaChalkboardTeacher } from 'react-icons/fa';
-import { Navigation } from  '../components/navigation';
+import { Navigation } from '../components/navigation';
 import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,11 +12,11 @@ export const metadata = {
 }
 
 const links = [
-  { href: '/faculty', label: 'Faculties', icon: <FaBuilding/> },
-  { href: '/course', label: 'Courses', icon: <FaSchool/> },
-  { href: '/student', label: 'Students', icon: <FaUserGraduate/> },
-  { href: '/professor', label: 'Professors',  icon: <FaChalkboardTeacher/> },
-  { href: '/semester', label: 'Semesters',  icon: <FaChalkboardTeacher/> },
+  { href: '/faculty', label: 'Faculties', icon: <FaBuilding /> },
+  { href: '/course', label: 'Courses', icon: <FaSchool /> },
+  { href: '/student', label: 'Students', icon: <FaUserGraduate /> },
+  { href: '/professor', label: 'Professors', icon: <FaChalkboardTeacher /> },
+  { href: '/semester', label: 'Semesters', icon: <FaChalkboardTeacher /> },
 ]
 
 export default function RootLayout({
@@ -28,9 +28,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className='flex'>
-          <Toaster/>
-          <Navigation links={links}/>
-          {children}
+          <Toaster />
+          <Navigation links={links} />
+          <div className='h-screen w-full overflow-y-auto'>
+            {children}
+          </div>
         </div>
       </body>
     </html>
