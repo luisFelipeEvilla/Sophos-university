@@ -2,7 +2,9 @@
 import CreateBanner from "@/components/create-banner";
 import NumericInput from "@/components/inputs/NumericInput";
 import TextInput from "@/components/inputs/TextInput";
+import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 type Inputs = {
     name: string
@@ -24,12 +26,14 @@ export default function AddCourse() {
         });
 
         if (res.status === 200) {
-            alert('Course Added Successfully')
+            toast('Course created Successfully', { icon: '👏'});
+            window.location.href = '/course';
         }
     }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full justify-center">
+            <Toaster/>
             <div className="flex flex-col items-center w-3/5 my-10">
                 <CreateBanner title="Add New Course"   imgPath={"/images/create-course-banner"} />
 

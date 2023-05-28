@@ -3,6 +3,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { FaSchool, FaUserGraduate, FaBuilding, FaChalkboardTeacher } from 'react-icons/fa';
 import { Navigation } from  '../components/navigation';
+import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className='flex'>
+          <Toaster/>
           <Navigation links={links}/>
           {children}
         </div>

@@ -5,13 +5,17 @@ import { Course } from "@/types/Course";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 
 type Inputs = {
-    name: number
+    name: number,
+    description: string,
+    max_quota: number,
+    credits: number,
 }
 
 export default function EditFaculty({params}: any) {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
+    const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
     const [course, setCourse] = useState<Course>();
 
     useEffect(() => {
@@ -19,6 +23,11 @@ export default function EditFaculty({params}: any) {
             const res = await fetch(`/api/course/${params.id}`);
             const faculty = await res.json();
             setCourse(faculty);
+
+            setValue('name', faculty.name);
+            setValue('description', faculty.description);
+            setValue('max_quota', faculty.max_quota);
+            setValue('credits', faculty.credits);
         }
 
         fetCourse();
@@ -34,7 +43,7 @@ export default function EditFaculty({params}: any) {
         });
 
         if (res.status === 200) {
-            alert('Faculty updated Successfully')
+            toast('Course updated Successfully', { icon: '👏'});
         }
     }
     return (

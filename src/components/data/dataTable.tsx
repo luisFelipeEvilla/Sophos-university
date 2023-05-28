@@ -1,5 +1,6 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 type propsType = { rows: any, columns: GridColDef[], entityName: string, setData: any }
 export default function DataTable(props: propsType) {
@@ -12,10 +13,10 @@ export default function DataTable(props: propsType) {
             .then(data => {
                 if (data.success) {
                     props.setData(props.rows.filter((row: { id: number; }) => row.id !== id))
-                    alert(`${props.entityName} deleted successfully`)
+                    toast(`${props.entityName} deleted successfully`, { icon: '👏' })
                 } else {
                     console.log(data)
-                    alert(`Error deleting ${props.entityName}}`)
+                    toast(`Error deleting ${props.entityName}`, { icon: '❌' })
                 }
             })
     }

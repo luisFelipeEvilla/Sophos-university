@@ -2,6 +2,8 @@
 import CreateBanner from "@/components/create-banner";
 import TextInput from "@/components/inputs/TextInput";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
+
 type Inputs = {
     name: string
 }
@@ -19,7 +21,7 @@ export default function addFaculty() {
         });
 
         if (res.status === 200) {
-            alert('Faculty Added Successfully')
+            toast('Faculty added Successfully', { icon: '👏'})
         }
     }
 

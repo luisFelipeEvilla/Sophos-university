@@ -3,6 +3,7 @@ import TextInput from "@/components/inputs/TextInput";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Inputs = {
     name: number
@@ -32,7 +33,7 @@ export default function EditFaculty({params}: any) {
         });
 
         if (res.status === 200) {
-            alert('Faculty updated Successfully')
+            toast('Faculty updated Successfully', { icon: '👏'})
         }
     }
     return (

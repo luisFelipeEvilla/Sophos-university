@@ -1,6 +1,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import DateInput from "../inputs/DateInput";
 import TextInput from "../inputs/TextInput";
+import toast from "react-hot-toast";
 
 type Inputs = {
     name: string,
@@ -24,11 +25,11 @@ export default function DegreeForm(props: propsType) {
         });
 
         if (res.status === 200) {
-            alert('Degree added Successfully')
+            toast('Degree added Successfully', { icon: '👏' })
             window.location.reload();
         } else {
             console.log(res);
-            alert('Error adding Degree')
+            toast('Error adding degree', { icon: '❌' })
         }
     }
 

@@ -1,3 +1,5 @@
+import toast, { Toaster } from "react-hot-toast";
+
 type propsType = { teacher: number, degree: Degree, index: number }
 export default function DegreeCard(props: propsType) {
     const handleDelete = async (teacherId: number, id: number) => {
@@ -6,11 +8,11 @@ export default function DegreeCard(props: propsType) {
         })
 
         if (res.status === 200) {
-            alert('Degree deleted Successfully')
+            toast('Degree deleted successfully', { icon: '👏'})
             window.location.reload();
         } else {
             console.log(res);
-            alert('Error deleting Degree')
+            toast('Error deleting degree', { icon: '❌'})
         }
     }
 

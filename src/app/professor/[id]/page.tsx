@@ -8,6 +8,7 @@ import { useForm, SubmitHandler, set } from "react-hook-form";
 import { getDate } from "../../utils/getDate";
 import DegreeForm from "@/components/forms/DegreeForm";
 import DegreeCard from "@/components/degree-card";
+import toast, { Toaster } from "react-hot-toast";
 
 type Inputs = {
     first_name: string,
@@ -33,10 +34,10 @@ export default function addProfessor({ params }: any) {
         });
 
         if (res.status === 200) {
-            alert('Professor updated Successfully')
+           toast('Professor updated Successfully', { icon: '👏'})
         } else {
             console.log(res);
-            alert('Error updating Professor')
+            toast('Error updating professor', { icon: '❌'})
         }
     }
 

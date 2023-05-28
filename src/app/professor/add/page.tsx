@@ -5,6 +5,7 @@ import SelectInput from "@/components/inputs/SelectInput";
 import TextInput from "@/components/inputs/TextInput";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast from "react-hot-toast";
 
 type Inputs = {
     first_name: string,
@@ -26,9 +27,9 @@ export default function addProfessor() {
         });
 
         if (res.status === 200) {
-            alert('Professor Added Successfully')
+            toast('Professor Added Successfully', { icon: '👏' })
         } else {
-            alert('Error Adding Professor')
+            toast('Error adding professor', { icon: '❌' })
             console.log(res);
         }
     }
