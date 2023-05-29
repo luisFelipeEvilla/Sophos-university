@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import DateInput from "../inputs/DateInput";
 import TextInput from "../inputs/TextInput";
 import toast from "react-hot-toast";
+import { clientRequest } from "@/utils/requests";
 
 type Inputs = {
     name: string,
@@ -14,23 +15,7 @@ export default function DegreeForm(props: propsType) {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
-        data.teacherId = parseInt(props.id);
-
-        const res = await fetch(`/api/professor/${props.id}/degree`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-            toast('Degree added Successfully', { icon: '👏' })
-            window.location.reload();
-        } else {
-            console.log(res);
-            toast('Error adding degree', { icon: '❌' })
-        }
+        await clientRequest(`professor/${props.id}/degree`, 'POST', data, 'Degree added successfully');
     }
 
 

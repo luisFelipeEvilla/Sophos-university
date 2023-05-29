@@ -1,7 +1,8 @@
+import { serverRequest } from "@/utils/requests";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
-    const res = await fetch(`http://127.0.0.1:3000/teacher`);
+    const res = await fetch(`${process.env.API_BASE_URL}/teacher`);
 
     const professors = await res.json();
 
@@ -10,15 +11,5 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
     const data = await req.json();
-    const res = await fetch(`http://127.0.0.1:3000/teacher`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    const professors = await res.json();
-
-    return NextResponse.json(professors);
+    return await serverRequest('teacher', 'POST', data);
 }

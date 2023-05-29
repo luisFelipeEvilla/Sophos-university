@@ -8,6 +8,7 @@ import { useForm, SubmitHandler, set } from "react-hook-form";
 import DegreeForm from "@/components/forms/DegreeForm";
 import DegreeCard from "../../../components/degree-card";
 import toast, { Toaster } from "react-hot-toast";
+import { clientRequest } from "@/utils/requests";
 
 type Inputs = {
     first_name: string,
@@ -24,20 +25,7 @@ export default function addProfessor({ params }: any) {
     const [loading, setLoading] = useState(true);
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res = await fetch(`/api/professor/${params.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-           toast('Professor updated Successfully', { icon: '👏'})
-        } else {
-            console.log(res);
-            toast('Error updating professor', { icon: '❌'})
-        }
+        await clientRequest(`professor/${params.id}`, 'PATCH', data, 'Professor updated successfully');
     }
 
     useEffect(() => {
