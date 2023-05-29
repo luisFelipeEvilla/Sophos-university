@@ -98,7 +98,7 @@ export default function addstudent({ params }: any) {
             <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
                     <div className="flex flex-col items-center w-3/5 ">
-                        <CreateBanner title="Add New Profesor" imgPath={"/images/student-banner.jpg"} />
+                        <CreateBanner title="Edit Student" imgPath={"/images/student-banner.jpg"} />
 
                         <div className="flex flex-col mt-4">
                             <TextInput label="First Name" placeholder="John" register={register} fieldName="first_name" options={{}} errors={errors} />

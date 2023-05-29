@@ -20,6 +20,7 @@ export default function addProfessor() {
     const onSubmit: SubmitHandler<Inputs> = async data => {
         try {
             await clientRequest('student', 'POST', data, 'Student added successfully');
+            window.location.href = '/student';
         } catch (error) {
             console.log(error);
         }
