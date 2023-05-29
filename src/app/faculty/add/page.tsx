@@ -1,8 +1,8 @@
 "use client";
 import CreateBanner from "@/components/create-banner";
 import TextInput from "@/components/inputs/TextInput";
+import { clientRequest } from "@/utils/requests";
 import { useForm, SubmitHandler } from "react-hook-form";
-import toast from "react-hot-toast";
 
 type Inputs = {
     name: string
@@ -12,17 +12,7 @@ export default function addFaculty() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
     
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res = await fetch('/api/faculty', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-            toast('Faculty added Successfully', { icon: '👏'})
-        }
+        await clientRequest('faculty', 'POST', data, 'Faculty added successfully');
     }
 
     return (

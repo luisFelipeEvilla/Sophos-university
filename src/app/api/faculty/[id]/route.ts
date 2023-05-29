@@ -1,9 +1,10 @@
+import { serverRequest } from "@/utils/requests";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, {params} : any) {
     const { id } = params;
 
-    const res = await fetch(`http://127.0.0.1:3000/faculty/${id}`);
+    const res = await fetch(`${process.env.API_BASE_URL}/faculty/${id}`);
 
     const faculty = await res.json();
 
@@ -11,31 +12,10 @@ export async function GET(req: Request, {params} : any) {
 }
 
 export async function PATCH(req: Request, {params} : any) {
-    const { id } = params;
-
     const data = await req.json();
-
-    const response = await fetch(`http://127.0.1:3000/faculty/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    const result = await response.json();
-
-    return NextResponse.json(result);
+    return await serverRequest(`faculty/${params.id}`, 'PATCH', data);
 }
 
 export async function DELETE(req: Request, {params}: any) {
-    const { id } = params;
-
-    const response = await fetch(`http://127.0.0.1:3000/faculty/${id}`, {
-        method: 'DELETE'
-    });
-
-    const result = await response.json();
-    
-    return NextResponse.json({ success: true, ...result});
+    return await serverRequest(`faculty/${params.id}`, 'DELETE', {});
 }

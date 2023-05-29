@@ -42,7 +42,5 @@ export async function serverRequest(path: string, method: string, data: any) {
         body: JSON.stringify(data)
     });
 
-    console.log(res);
-    
     return res;
 }

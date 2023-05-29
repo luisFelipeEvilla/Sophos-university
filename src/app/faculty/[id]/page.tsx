@@ -1,5 +1,7 @@
 "use client";
+import CreateBanner from "@/components/create-banner";
 import TextInput from "@/components/inputs/TextInput";
+import { clientRequest } from "@/utils/requests";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -24,25 +26,12 @@ export default function EditFaculty({params}: any) {
     }, [params])
     
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res = await fetch(`/api/faculty/${params.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-            toast('Faculty updated Successfully', { icon: '👏'})
-        }
+       await clientRequest(`faculty/${params.id}`, 'PATCH', data, 'Faculty updated successfully');
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex w-full justify-center">
             <div className="flex flex-col items-center w-3/5 my-10">
-                <div className="flex flex-col items-center justify-center ">
-                    <div className="w-[160px] h-[160px] rounded-full bg-gray-500"></div>
-                    <h1 className="text-4xl font-bold mt-6">Add Faculty</h1>
-                </div>
+                <CreateBanner title="Edit Faculty" imgPath="/images/faculty-banner.png" />
 
                 <div className="flex flex-col mt-4">
                     <TextInput
