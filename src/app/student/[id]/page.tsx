@@ -5,6 +5,7 @@ import SelectInput from "@/components/inputs/SelectInput";
 import TextInput from "@/components/inputs/TextInput";
 import { Course } from "@/types/Course";
 import { Student } from "@/types/Student";
+import { clientRequest } from "@/utils/requests";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -32,36 +33,21 @@ export default function addstudent({ params }: any) {
     ];
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res = await fetch(`/api/student/${params.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-            toast('Student updated Successfully', { icon: '👏' })
-        } else {
-            console.log(res);
-            toast('Error updating student', { icon: '❌' })
-        }
+       try {
+            const student = await clientRequest(`student/${params.id}`, 'PATCH', data, 'Student updated successfully'); 
+            setStudent(student);
+       } catch (error) {
+            console.log(error);
+       }
     }
 
     const handleEnroll = async () => {
-        const res = await fetch(`/api/student/${params.id}/semester`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ credits: 17 })
-        });
-
-        const result = await res.json();
-        if (result.success === true) {
-            toast('Student enrolled Successfully', { icon: '👏' })
-        } else {
-            toast('Error enrolling student', { icon: '❌' })
+        try {
+            const res = await clientRequest(`student/${params.id}/semester`, 'POST', {
+                credits: 17,
+            }, 'Student enrolled successfully');
+        } catch (error) {
+            console.log(error);
         }
     }
 
@@ -118,7 +104,7 @@ export default function addstudent({ params }: any) {
                             <TextInput label="First Name" placeholder="John" register={register} fieldName="first_name" options={{}} errors={errors} />
                             <TextInput label="Last Name" placeholder="Doe" register={register} fieldName="last_name" options={{}} errors={errors} />
                             <DateInput defaultValue={student?.birthday} label="Birth Date" placeholder="John Doe Faculty" register={register} fieldName="birthday" options={{}} errors={errors} />
-                            <SelectInput rows={faculties} rowsLabel="name" rowsValue="id" label="Faculty" placeholder="faculty" register={register} fieldName="facultyId" options={{}} errors={errors} />
+                            <SelectInput rows={faculties} rowsLabel="name" rowsValue="id" label="Faculty" placeholder="faculty" register={register} fieldName="facultyId" options={{valueAsNumber: true }} errors={errors} />
                         </div>
 
                         <div className="flex items-center gap-2 justify-center mt-6">

@@ -18,7 +18,11 @@ export default function addProfessor() {
     const [faculties, setFaculties] = useState([]);
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        await clientRequest('student', 'POST', data, 'Student added successfully');
+        try {
+            await clientRequest('student', 'POST', data, 'Student added successfully');
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
