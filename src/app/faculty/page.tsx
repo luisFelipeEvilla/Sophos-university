@@ -3,15 +3,20 @@ import { useEffect, useState } from "react"
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Link from "next/link";
 import DataTable from "@/components/data/dataTable";
+import Spinner from "@/components/spinner";
 
 
 export default function Faculties() {
     const [faculties, setFaculties] = useState<Faculty[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetch('/api/faculty')
             .then(response => response.json())
-            .then(data => { setFaculties(data) })
+            .then(data => {
+                setFaculties(data) 
+                setLoading(false)
+            })
     }, [])
 
     const columns: GridColDef[] = [
@@ -20,6 +25,7 @@ export default function Faculties() {
     ]
 
     return (
+        loading ? <Spinner /> :
         <main className="flex flex-col items-center w-full py-20">
             <h1 className="text-4xl font-bold">Faculties</h1>
             <div className="flex justify-end mt-4 w-3/5">

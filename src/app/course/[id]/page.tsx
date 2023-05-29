@@ -11,6 +11,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Student } from "@/types/Student";
 import CreateBanner from "@/components/create-banner";
 import AddStudentForm from "@/components/forms/addStudentForm";
+import Spinner from "@/components/spinner";
 
 type Inputs = {
     name: number,
@@ -23,6 +24,7 @@ export default function EditFaculty({ params }: any) {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
     const [course, setCourse] = useState<Course>();
     const [ students , setStudents ] = useState<Student[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const columns = [
         { field: 'id', headerName: 'ID', flex: 0.3 },
@@ -50,6 +52,8 @@ export default function EditFaculty({ params }: any) {
             })
 
             setStudents(students);
+
+            setLoading(false);
         }
 
         fetCourse();
@@ -74,6 +78,7 @@ export default function EditFaculty({ params }: any) {
     }
 
     return (
+        loading ? <Spinner /> :
         <div className="flex flex-col w-full items-center">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-3/5 my-10">
                 <CreateBanner title="Edit Course" imgPath={"/images/course-banner.jpg"} />
