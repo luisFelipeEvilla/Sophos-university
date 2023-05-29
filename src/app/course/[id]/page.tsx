@@ -10,6 +10,7 @@ import AddProfessorForm from "../../../components/forms/addProfessorForm";
 import { DataGrid } from "@mui/x-data-grid";
 import { Student } from "@/types/Student";
 import CreateBanner from "@/components/create-banner";
+import AddStudentForm from "@/components/forms/addStudentForm";
 
 type Inputs = {
     name: number,
@@ -117,7 +118,9 @@ export default function EditFaculty({ params }: any) {
 
             <div className="flex flex-col gap-4">
                 <h4 className="text-xl text-center font-semibold">Students</h4>
-
+                
+                <AddStudentForm id={params.id} />
+                
                 <div className="flex h-[600px]">
                     <DataGrid
                         rows={students || []}
