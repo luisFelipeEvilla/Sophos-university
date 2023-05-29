@@ -1,18 +1,14 @@
+import { clientRequest } from "@/utils/requests";
 import toast from "react-hot-toast";
 
-type propsType = { teacher: number, degree: Degree, index: number }
+type propsType = { teacher: number, degree: Degree, index: number, removeDegree: Function }
 export default function DegreeCard(props: propsType) {
     const handleDelete = async (teacherId: number, id: number) => {
-        const res = await fetch(`/api/professor/${teacherId}/degree/${id}`, {
-            method: 'DELETE'
-        })
-
-        if (res.status === 200) {
-            toast('Degree deleted successfully', { icon: '👏'})
-            window.location.reload();
-        } else {
-            console.log(res);
-            toast('Error deleting degree', { icon: '❌'})
+        try {
+            await clientRequest(`professor/${teacherId}/degree/${id}`, 'DELETE', {}, 'Degree deleted successfully');
+            props.removeDegree(props.degree);
+        } catch (error) {
+            console.log(error);
         }
     }
 

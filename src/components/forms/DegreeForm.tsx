@@ -9,15 +9,18 @@ type Inputs = {
     earned_at: string
 }
 
-type propsType = { id: string }
-
+type propsType = { id: string, addDegree: Function }
 export default function DegreeForm(props: propsType) {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (data: any) => {
-        await clientRequest(`professor/${props.id}/degree`, 'POST', data, 'Degree added successfully');
+        try {
+            const degree = await clientRequest(`professor/${props.id}/degree`, 'POST', data, 'Degree added successfully');
+            props.addDegree(degree);
+        } catch (error) {   
+            console.log(error);
+        }
     }
-
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-full">

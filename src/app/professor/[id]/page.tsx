@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler, set } from "react-hook-form";
 import DegreeForm from "@/components/forms/DegreeForm";
 import DegreeCard from "../../../components/degree-card";
-import toast, { Toaster } from "react-hot-toast";
 import { clientRequest } from "@/utils/requests";
 
 type Inputs = {
@@ -19,13 +18,25 @@ type Inputs = {
 
 export default function addProfessor({ params }: any) {
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm<Inputs>();
-    const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm<Inputs>();
     const [professor, setProfessor] = useState<Professor>();
     const [faculties, setFaculties] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
         await clientRequest(`professor/${params.id}`, 'PATCH', data, 'Professor updated successfully');
+    }
+    
+    const addDegree = (degree: Degree) => {
+        professor?.degrees.push(degree);
+        setProfessor(professor);
+    }
+
+    const removeDegree = (degree: Degree) => {
+        if (!professor) return;
+
+        const degrees = professor?.degrees.filter(d => d.id !== degree.id);       
+        professor.degrees = degrees;
+        setProfessor(professor);
     }
 
     useEffect(() => {
@@ -79,12 +90,12 @@ export default function addProfessor({ params }: any) {
                 <div className="flex flex-col mt-8 w-3/5 gap-4 text-center">
                     <h4 className="font-bold text-3xl text-center">Degrees</h4>
 
-                    <DegreeForm id={params.id} />
+                    <DegreeForm id={params.id} addDegree={addDegree}/>
 
                     <div className="flex justify-center gap-4 w-full">
                         {
                             professor?.degrees.map((degree, index) => (
-                                <DegreeCard teacher={params.id} key={index} degree={degree} index={0} />
+                                <DegreeCard removeDegree={removeDegree} teacher={params.id} key={index} degree={degree} index={0} />
                             ))
                         }
                     </div>
