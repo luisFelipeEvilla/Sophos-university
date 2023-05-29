@@ -4,15 +4,20 @@ import { GridColDef } from '@mui/x-data-grid';
 import Link from "next/link";
 import DataTable from "@/components/data/dataTable";
 import { Semester } from "@/types/Semester";
+import Spinner from "@/components/spinner";
 
 
 export default function Semesters() {
     const [semesters, setSemesters] = useState<Semester[]>([])
+    const [loading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         fetch('/api/semester')
             .then(response => response.json())
-            .then(data => { setSemesters(data) })
+            .then(data => { 
+                setSemesters(data) 
+                setLoading(false)
+            })
     }, [])
 
     const columns: GridColDef[] = [
@@ -22,6 +27,7 @@ export default function Semesters() {
     ]
 
     return (
+        loading ? <Spinner /> :
         <main className="flex flex-col items-center w-full py-20">
             <h1 className="text-4xl font-bold">Semesters</h1>
             <div className="flex justify-end mt-4 w-3/5">

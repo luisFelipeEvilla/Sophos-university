@@ -3,13 +3,13 @@ import CreateBanner from "@/components/create-banner";
 import DateInput from "@/components/inputs/DateInput";
 import SelectInput from "@/components/inputs/SelectInput";
 import TextInput from "@/components/inputs/TextInput";
+import Spinner from "@/components/spinner";
 import { Course } from "@/types/Course";
 import { Student } from "@/types/Student";
 import { clientRequest } from "@/utils/requests";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import toast from "react-hot-toast";
 
 type Inputs = {
     first_name: string,
@@ -94,7 +94,7 @@ export default function addstudent({ params }: any) {
     }, [setValue]);
 
     return (
-        loading ? <div>Loading...</div> :
+        loading ? <Spinner/> :
             <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
                     <div className="flex flex-col items-center w-3/5 ">

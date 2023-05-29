@@ -8,6 +8,7 @@ import { useForm, SubmitHandler, set } from "react-hook-form";
 import DegreeForm from "@/components/forms/DegreeForm";
 import DegreeCard from "../../../components/degree-card";
 import { clientRequest } from "@/utils/requests";
+import Spinner from "@/components/spinner";
 
 type Inputs = {
     first_name: string,
@@ -25,7 +26,7 @@ export default function addProfessor({ params }: any) {
     const onSubmit: SubmitHandler<Inputs> = async data => {
         await clientRequest(`professor/${params.id}`, 'PATCH', data, 'Professor updated successfully');
     }
-    
+
     const addDegree = (degree: Degree) => {
         professor?.degrees.push(degree);
         setProfessor(professor);
@@ -34,7 +35,7 @@ export default function addProfessor({ params }: any) {
     const removeDegree = (degree: Degree) => {
         if (!professor) return;
 
-        const degrees = professor?.degrees.filter(d => d.id !== degree.id);       
+        const degrees = professor?.degrees.filter(d => d.id !== degree.id);
         professor.degrees = degrees;
         setProfessor(professor);
     }
@@ -50,6 +51,8 @@ export default function addProfessor({ params }: any) {
             setValue('last_name', professor.last_name);
             setValue('birthday', professor.birthday);
             setValue('facultyId', professor.facultyId);
+
+            setLoading(false);
         };
 
         getProfessor();
@@ -62,11 +65,10 @@ export default function addProfessor({ params }: any) {
 
         getFaculties();
 
-        setLoading(false);
     }, [setValue]);
 
     return (
-        loading ? <div>Loading...</div> :
+        loading ? <Spinner /> :
             <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
                     <div className="flex flex-col items-center w-3/5 ">
@@ -90,7 +92,7 @@ export default function addProfessor({ params }: any) {
                 <div className="flex flex-col mt-8 w-3/5 gap-4 text-center">
                     <h4 className="font-bold text-3xl text-center">Degrees</h4>
 
-                    <DegreeForm id={params.id} addDegree={addDegree}/>
+                    <DegreeForm id={params.id} addDegree={addDegree} />
 
                     <div className="flex justify-center gap-4 w-full">
                         {

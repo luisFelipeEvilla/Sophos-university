@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import NumericInput from "@/components/inputs/NumericInput";
+import Spinner from "@/components/spinner";
 
 type Inputs = {
     year: number,
@@ -49,7 +50,7 @@ export default function addProfessor({ params }: any) {
     }, [setValue]);
 
     return (
-        loading ? <div>Loading...</div> :
+        loading ? <Spinner /> :
             <div key={1} onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-full items-center py-10">
                 <form className="flex w-full justify-center">
                     <div className="flex flex-col items-center w-3/5 ">
