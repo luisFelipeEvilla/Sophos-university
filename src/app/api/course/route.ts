@@ -7,13 +7,13 @@ export async function GET() {
 
     const result = await res.json(); 
 
-    return NextResponse.json(result);
+    return NextResponse.json(result, { status: res.status })
 }
 
 export async function POST(req: Request) {
     const data = await req.json();
 
-    const response = await fetch(`${process.env.API_BASE_URL}/course`, {
+    const res= await fetch(`${process.env.API_BASE_URL}/course`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -21,10 +21,7 @@ export async function POST(req: Request) {
         body: JSON.stringify(data)
     });
 
-    const result = await response.json();
+    const result = await res.json();
 
-    console.log(result);
-    
-
-    return NextResponse.json(result);
+    return NextResponse.json(result, { status: res.status })
 }

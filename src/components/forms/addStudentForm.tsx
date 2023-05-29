@@ -18,8 +18,6 @@ export default function AddStudentForm(props: any) {
     }, [])
 
     const onSubmit = async (data: any) => {
-        console.log(data);
-        
         const res = await fetch(`/api/course/${props.id}/student/${data.student}`, {
             method: 'POST',
             headers: {

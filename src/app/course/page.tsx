@@ -25,7 +25,7 @@ export default function Courses() {
 
     return (
         <main className="flex flex-col items-center w-full py-20">
-            <h1 className="text-4xl font-bold">Faculties</h1>
+            <h1 className="text-4xl font-bold">Courses</h1>
             <div className="flex justify-end mt-4 w-3/5">
                 <Link className="bg-green-500 hover:bg-green-600 rounded-md text-white font-bold px-6 py-2" href={'/course/add'}>New</Link>
             </div>

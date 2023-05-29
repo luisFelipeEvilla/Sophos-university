@@ -25,9 +25,13 @@ export default function AddCourse() {
             body: JSON.stringify(data)
         });
 
-        if (res.status === 200) {
+        const result = await res.json();
+        
+        if (res.status === 201) {
             toast('Course created Successfully', { icon: '👏'});
             window.location.href = '/course';
+        } else {
+            toast(result.message, { icon: '❌'})
         }
     }
 

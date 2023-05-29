@@ -64,10 +64,15 @@ export default function EditFaculty({ params }: any) {
             body: JSON.stringify(data)
         });
 
+        const result = await res.json();
+
         if (res.status === 200) {
             toast('Course updated Successfully', { icon: '👏' });
+        } else {
+            toast.error(result.message, { icon: '❌' });
         }
     }
+
     return (
         <div className="flex flex-col w-full items-center">
             <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-3/5 my-10">
@@ -120,7 +125,7 @@ export default function EditFaculty({ params }: any) {
                 <h4 className="text-xl text-center font-semibold">Students</h4>
                 
                 <AddStudentForm id={params.id} />
-                
+
                 <div className="flex h-[600px]">
                     <DataGrid
                         rows={students || []}

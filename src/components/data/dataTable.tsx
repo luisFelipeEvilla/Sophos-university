@@ -5,21 +5,21 @@ import toast from "react-hot-toast";
 type propsType = { rows: any, columns: GridColDef[], entityName: string, setData: any }
 export default function DataTable(props: propsType) {
 
-    const handleDelete = (id: number) => {
-        fetch(`/api/${props.entityName}/${id}`, {
+    const handleDelete = async (id: number) => {
+        const res = await fetch(`/api/${props.entityName}/${id}`, {
             method: 'DELETE'
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    props.setData(props.rows.filter((row: { id: number; }) => row.id !== id))
-                    toast(`${props.entityName} deleted successfully`, { icon: '👏' })
-                } else {
-                    console.log(data)
-                    toast(`Error deleting ${props.entityName}`, { icon: '❌' })
-                }
-            })
+
+        const result = await res.json();
+
+        if (res.status === 200) {
+            props.setData(props.rows.filter((row: { id: number; }) => row.id !== id))
+            toast(`${props.entityName} deleted successfully`, { icon: '👏' })
+        } else {
+            toast(result.message, { icon: '❌' })
+        }
     }
+
 
     props.columns.push(
         {
@@ -33,7 +33,8 @@ export default function DataTable(props: propsType) {
 
                 </div>
             )
-        });
+        }
+    );
 
     return (
         <div className="w-3/5 h-5/6 mt-6">
