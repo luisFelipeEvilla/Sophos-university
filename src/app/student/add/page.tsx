@@ -3,9 +3,9 @@ import CreateBanner from "@/components/create-banner";
 import DateInput from "@/components/inputs/DateInput";
 import SelectInput from "@/components/inputs/SelectInput";
 import TextInput from "@/components/inputs/TextInput";
+import { clientRequest } from "@/utils/requests";
 import { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import toast from "react-hot-toast";
 
 type Inputs = {
     first_name: string,
@@ -18,20 +18,7 @@ export default function addProfessor() {
     const [faculties, setFaculties] = useState([]);
 
     const onSubmit: SubmitHandler<Inputs> = async data => {
-        const res = await fetch('/api/student', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (res.status === 200) {
-            toast('Student Added Successfully', { icon: '👏' })
-        } else {
-            toast('Error adding student', { icon: '❌' })
-            console.log(res);
-        }
+        await clientRequest('student', 'POST', data, 'Student added successfully');
     }
 
     useEffect(() => {

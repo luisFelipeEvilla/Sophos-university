@@ -1,3 +1,4 @@
+import { clientRequest } from "@/utils/requests";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -6,17 +7,11 @@ type propsType = { rows: any, columns: GridColDef[], entityName: string, setData
 export default function DataTable(props: propsType) {
 
     const handleDelete = async (id: number) => {
-        const res = await fetch(`/api/${props.entityName}/${id}`, {
-            method: 'DELETE'
-        })
-
-        const result = await res.json();
-
-        if (res.status === 200) {
-            props.setData(props.rows.filter((row: { id: number; }) => row.id !== id))
-            toast(`${props.entityName} deleted successfully`, { icon: '👏' })
-        } else {
-            toast(result.message, { icon: '❌' })
+        try {
+            await clientRequest(`${props.entityName}/${id}`, 'DELETE', {}, 'Deleted successfully');
+            props.setData(props.rows.filter((row: any) => row.id != id));
+        } catch (error) {
+            console.log(error);
         }
     }
 

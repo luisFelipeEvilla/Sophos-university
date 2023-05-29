@@ -4,15 +4,14 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Link from "next/link";
 import DataTable from "@/components/data/dataTable";
 import { Course } from "@/types/Course";
+import { getRequest } from "@/utils/requests";
 
 
 export default function Courses() {
     const [courses, setCourses] = useState<Course[]>([])
 
     useEffect(() => {
-        fetch('/api/course')
-            .then(response => response.json())
-            .then(data => { setCourses(data) })
+        getRequest('/course').then(res => { setCourses(res)})
     }, [])
 
     const columns: GridColDef[] = [

@@ -1,3 +1,4 @@
+import { serverRequest } from "@/utils/requests";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
@@ -15,16 +16,5 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {     
     const data = await req.json();
-
-    const res = await fetch(`${process.env.API_BASE_URL}/student`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-
-    return NextResponse.json(result, { status: 200 })
+    return await serverRequest('student', 'POST', data);
 }
