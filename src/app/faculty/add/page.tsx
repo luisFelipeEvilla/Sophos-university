@@ -13,6 +13,7 @@ export default function addFaculty() {
     
     const onSubmit: SubmitHandler<Inputs> = async data => {
         await clientRequest('faculty', 'POST', data, 'Faculty added successfully');
+        window.location.href = '/faculty';
     }
 
     return (
