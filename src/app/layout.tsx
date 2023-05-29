@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import './globals.css'
 import { Inter } from 'next/font/google'
-import { FaSchool, FaUserGraduate, FaBuilding, FaChalkboardTeacher } from 'react-icons/fa';
+import { FaSchool, FaUserGraduate, FaBuilding, FaChalkboardTeacher, FaClock } from 'react-icons/fa';
 import { Navigation } from '../components/navigation';
 import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] })
@@ -16,7 +16,7 @@ const links = [
   { href: '/course', label: 'Courses', icon: <FaSchool /> },
   { href: '/student', label: 'Students', icon: <FaUserGraduate /> },
   { href: '/professor', label: 'Professors', icon: <FaChalkboardTeacher /> },
-  { href: '/semester', label: 'Semesters', icon: <FaChalkboardTeacher /> },
+  { href: '/semester', label: 'Semesters', icon: <FaClock /> },
 ]
 
 export default function RootLayout({

@@ -9,6 +9,8 @@ import DegreeForm from "@/components/forms/DegreeForm";
 import DegreeCard from "../../../components/degree-card";
 import { clientRequest } from "@/utils/requests";
 import Spinner from "@/components/spinner";
+import CoursesTable from "@/components/data/coursesTable";
+import { Degree, Professor } from "@/types/Profesor";
 
 type Inputs = {
     first_name: string,
@@ -102,6 +104,9 @@ export default function addProfessor({ params }: any) {
                         }
                     </div>
                 </div>
+
+                <CoursesTable courses={professor?.courses || []}/>
+
             </div>
     )
 }

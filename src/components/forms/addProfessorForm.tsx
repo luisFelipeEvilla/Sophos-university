@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Professor } from "@/types/Profesor";
 
 export default function AddProfessorForm(props: any) {
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -35,7 +36,7 @@ export default function AddProfessorForm(props: any) {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center w-full">
-            <div className="flex flex-col mt-4">
+            <div className="flex items-center flex-col mt-4">
                 <label className="text-lg font-bold">Select A Professor</label>
                 <select
                     className="border-2 border-gray-300 rounded-md px-4 py-2 mt-2 focus:outline-none focus:border-green-500"

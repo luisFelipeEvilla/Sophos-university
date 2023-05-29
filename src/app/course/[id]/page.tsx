@@ -112,7 +112,7 @@ export default function EditFaculty({ params }: any) {
                 </div>
             </form>
 
-            <div className="flex justify-center w-3/5 flex-col">
+            <div className="flex items-center w-3/5 flex-col">
                 <h4 className="text-xl text-center font-semibold">Teachers</h4>
                 
                 < AddProfessorForm id={params.id} />
